@@ -26,4 +26,5 @@
 技术栈选择为：
 * 语言：Java 8+
 * 单元测试框架：JUnit
+* 验证框架：AssertJ
 * 模拟框架：Mockito
