@@ -13,13 +13,13 @@ public class AnswerGenerator {
 
     public Answer generate() {
         ArrayList<Integer> numbers = generateUniqueCorrectNumbers();
-        return new Answer(numbers.get(0), numbers.get(1), numbers.get(2), numbers.get(3));
+        return new Answer(numbers);
     }
 
     private ArrayList<Integer> generateUniqueCorrectNumbers() {
-        ArrayList<Integer> numbers = new ArrayList<>(4);
+        ArrayList<Integer> numbers = new ArrayList<>(Answer.AMOUNT_OF_ANSWER_VALUE);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < Answer.AMOUNT_OF_ANSWER_VALUE; i++) {
             int number = random.next();
             while (isOutOfRange(number) || isDuplicate(numbers, number)) {
                 number = random.next();

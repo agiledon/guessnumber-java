@@ -2,31 +2,30 @@ package xyz.zhangyi.tdd.guessnumber.model;
 
 import xyz.zhangyi.tdd.guessnumber.exception.InvalidAnswerException;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Answer {
-    private int number1;
-    private int number2;
-    private int number3;
-    private int number4;
+    public static final int AMOUNT_OF_ANSWER_VALUE = 4;
+    private List<Integer> numbers = new ArrayList<>(AMOUNT_OF_ANSWER_VALUE);
 
     public Answer(int number1, int number2, int number3, int number4) {
-        this.number1 = number1;
-        this.number2 = number2;
-        this.number3 = number3;
-        this.number4 = number4;
-
-        validateRange();
-        validateDuplication();
+        numbers.add(number1);
+        numbers.add(number2);
+        numbers.add(number3);
+        numbers.add(number4);
+        validate(numbers);
     }
 
-    private void validateRange() {
-        validateRange(this.number1);
-        validateRange(this.number2);
-        validateRange(this.number3);
-        validateRange(this.number4);
+    public Answer(List<Integer> numbers) {
+        this.numbers = numbers;
+        validate(numbers);
+    }
+
+    private void validate(List<Integer> numbers) {
+        for (Integer number : numbers) {
+            validateRange(number);
+        }
+        validateDuplication(numbers);
     }
 
     private void validateRange(int number) {
@@ -35,14 +34,13 @@ public class Answer {
         }
     }
 
-    private void validateDuplication() {
-        Set<Integer> numbers = new HashSet<>(4);
-        numbers.add(this.number1);
-        numbers.add(this.number2);
-        numbers.add(this.number3);
-        numbers.add(this.number4);
+    private void validateDuplication(List<Integer> numbers) {
+        Set<Integer> numbersSet = new HashSet<>();
+        for (Integer number : numbers) {
+            numbersSet.add(number);
+        }
 
-        if (numbers.size() != 4) {
+        if (numbersSet.size() != AMOUNT_OF_ANSWER_VALUE) {
             throw new InvalidAnswerException("duplicated numbers");
         }
     }
@@ -52,14 +50,11 @@ public class Answer {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Answer answer = (Answer) o;
-        return number1 == answer.number1 &&
-                number2 == answer.number2 &&
-                number3 == answer.number3 &&
-                number4 == answer.number4;
+        return Objects.equals(numbers, answer.numbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number1, number2, number3, number4);
+        return Objects.hash(numbers);
     }
 }
