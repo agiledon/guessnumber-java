@@ -17,15 +17,16 @@ public class Answer {
         this.number2 = number2;
         this.number3 = number3;
         this.number4 = number4;
-        validateRange(number1, number2, number3, number4);
-        validateDuplication(number1, number2, number3, number4);
+
+        validateRange();
+        validateDuplication();
     }
 
-    private void validateRange(int number1, int number2, int number3, int number4) {
-        validateRange(number1);
-        validateRange(number2);
-        validateRange(number3);
-        validateRange(number4);
+    private void validateRange() {
+        validateRange(this.number1);
+        validateRange(this.number2);
+        validateRange(this.number3);
+        validateRange(this.number4);
     }
 
     private void validateRange(int number) {
@@ -34,12 +35,12 @@ public class Answer {
         }
     }
 
-    private void validateDuplication(int number1, int number2, int number3, int number4) {
+    private void validateDuplication() {
         Set<Integer> numbers = new HashSet<>(4);
-        numbers.add(number1);
-        numbers.add(number2);
-        numbers.add(number3);
-        numbers.add(number4);
+        numbers.add(this.number1);
+        numbers.add(this.number2);
+        numbers.add(this.number3);
+        numbers.add(this.number4);
 
         if (numbers.size() != 4) {
             throw new InvalidAnswerException("duplicated numbers");

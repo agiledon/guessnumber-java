@@ -14,6 +14,7 @@ public class AnswerGenerator {
         int number2 = random.next();
         int number3 = random.next();
         int number4 = random.next();
+
         return new Answer(number1, number2, number3, number4);
     }
 }
