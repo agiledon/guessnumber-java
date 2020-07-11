@@ -2,6 +2,8 @@ package xyz.zhangyi.tdd.guessnumber.service;
 
 import xyz.zhangyi.tdd.guessnumber.model.Answer;
 
+import java.util.ArrayList;
+
 public class AnswerGenerator {
     private IntRandom random;
 
@@ -10,11 +12,16 @@ public class AnswerGenerator {
     }
 
     public Answer generate() {
-        int number1 = random.next();
-        int number2 = random.next();
-        int number3 = random.next();
-        int number4 = random.next();
+        ArrayList<Integer> numbers = new ArrayList<>(4);
 
-        return new Answer(number1, number2, number3, number4);
+        for (int i = 0; i < 4; i++) {
+            int number = random.next();
+            while (number < 0 || number > 9 || numbers.contains(number)) {
+                number = random.next();
+            }
+            numbers.add(number);
+        }
+
+        return new Answer(numbers.get(0), numbers.get(1), numbers.get(2), numbers.get(3));
     }
 }

@@ -11,7 +11,7 @@ public class AnswerGeneratorTest {
     public void should_generate_correct_answer() {
         // given
         IntRandom mockRandom = mock(IntRandom.class);
-        when(mockRandom.next()).thenReturn(1, 2, 3, 4);
+        when(mockRandom.next()).thenReturn(1, 2, 3, 10, 2, 4);
 
         AnswerGenerator generator = new AnswerGenerator(mockRandom);
 
@@ -19,7 +19,7 @@ public class AnswerGeneratorTest {
         Answer actualAnswer = generator.generate();
 
         // then
-        verify(mockRandom, times(4)).next();
+        verify(mockRandom, times(6)).next();
         Answer expectedAnswer = new Answer(1, 2, 3, 4);
         assertThat(actualAnswer).isEqualTo(expectedAnswer);
     }
