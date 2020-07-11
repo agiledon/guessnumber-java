@@ -1,4 +1,4 @@
-package xyz.zhangyi.tdd.guessnumber;
+package xyz.zhangyi.tdd.guessnumber.model;
 
 import xyz.zhangyi.tdd.guessnumber.exception.InvalidAnswerException;
 

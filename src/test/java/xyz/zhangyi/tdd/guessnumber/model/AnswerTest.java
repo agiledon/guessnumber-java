@@ -1,7 +1,8 @@
-package xyz.zhangyi.tdd.guessnumber;
+package xyz.zhangyi.tdd.guessnumber.model;
 
 import org.junit.Test;
 import xyz.zhangyi.tdd.guessnumber.exception.InvalidAnswerException;
+import xyz.zhangyi.tdd.guessnumber.model.Answer;
 
 import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
 
