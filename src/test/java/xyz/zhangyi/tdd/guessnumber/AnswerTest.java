@@ -12,4 +12,11 @@ public class AnswerTest {
                 .isInstanceOf(InvalidAnswerException.class)
                 .hasMessage("out of range (0, 9)");
     }
+
+    @Test
+    public void should_thow_InvalidAnswerException_given_duplicated_numbers() {
+        assertThatThrownBy(() -> new Answer(1, 2, 3, 1))
+                .isInstanceOf(InvalidAnswerException.class)
+                .hasMessage("duplicated numbers");
+    }
 }
