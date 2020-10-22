@@ -1,5 +1,6 @@
 package xyz.zhangyi.tdd.guessnumber.service;
 
+import xyz.zhangyi.tdd.guessnumber.infrastructure.IntRandom;
 import xyz.zhangyi.tdd.guessnumber.model.Answer;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ public class AnswerGenerator {
 
     public Answer generate() {
         ArrayList<Integer> numbers = generateUniqueCorrectNumbers();
-        return new Answer(numbers);
+        return Answer.of(numbers);
     }
 
     private ArrayList<Integer> generateUniqueCorrectNumbers() {

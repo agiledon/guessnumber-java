@@ -8,7 +8,7 @@ public class Answer {
     public static final int AMOUNT_OF_ANSWER_VALUE = 4;
     private List<Integer> numbers = new ArrayList<>(AMOUNT_OF_ANSWER_VALUE);
 
-    public Answer(int number1, int number2, int number3, int number4) {
+    private Answer(int number1, int number2, int number3, int number4) {
         numbers.add(number1);
         numbers.add(number2);
         numbers.add(number3);
@@ -16,9 +16,17 @@ public class Answer {
         validate(numbers);
     }
 
-    public Answer(List<Integer> numbers) {
+    private Answer(List<Integer> numbers) {
         this.numbers = numbers;
         validate(numbers);
+    }
+
+    public static Answer of(List<Integer> numbers) {
+        return new Answer(numbers);
+    }
+
+    public static Answer of(int number1, int number2, int number3, int number4) {
+        return new Answer(number1, number2, number3, number4);
     }
 
     private void validate(List<Integer> numbers) {
@@ -43,6 +51,32 @@ public class Answer {
         if (numbersSet.size() != AMOUNT_OF_ANSWER_VALUE) {
             throw new InvalidAnswerException("duplicated numbers");
         }
+    }
+
+    public String compare(Answer input) {
+        int valueOfA = 0;
+        int valueOfB = 0;
+
+        for (int i = 0; i < numbers.size(); i++) {
+            for (int j = 0; j < input.numbers.size(); j++) {
+                if (this.sameValue(input, i, j) && this.samePosition(i, j)) {
+                    valueOfA++;
+                } else {
+                    if (this.sameValue(input, i, j)) {
+                        valueOfB++;
+                    }
+                }
+            }
+        }
+        return String.format("%sA%sB", valueOfA, valueOfB);
+    }
+
+    private boolean samePosition(int indexOfActualAnswer, int indexOfInputAnswer) {
+        return indexOfActualAnswer == indexOfInputAnswer;
+    }
+
+    private boolean sameValue(Answer input, int indexOfActualAnswer, int indexOfInputAnswer) {
+        return numbers.get(indexOfActualAnswer).equals(input.numbers.get(indexOfInputAnswer));
     }
 
     @Override

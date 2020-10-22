@@ -1,6 +1,7 @@
 package xyz.zhangyi.tdd.guessnumber.service;
 
 import org.junit.Test;
+import xyz.zhangyi.tdd.guessnumber.infrastructure.IntRandom;
 import xyz.zhangyi.tdd.guessnumber.model.Answer;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +21,7 @@ public class AnswerGeneratorTest {
 
         // then
         verify(mockRandom, times(6)).next();
-        Answer expectedAnswer = new Answer(1, 2, 3, 4);
+        Answer expectedAnswer = Answer.of(1, 2, 3, 4);
         assertThat(actualAnswer).isEqualTo(expectedAnswer);
     }
 }
